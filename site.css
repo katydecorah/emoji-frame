@@ -19,25 +19,6 @@ body {
 body {
   background: #ECF0F1;
   color: #22313F;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
 }
 
 section {
@@ -51,18 +32,40 @@ section {
   border-bottom: 2px solid #34495E;
 }
 
-.input {
+.input,
+.chosen-container-single .chosen-single {
   max-width: 100%;
   border: 1px solid #D2D7D3;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  height: 36px;
+}
+
+.chosen-single span {
+  top: 5px;
+  position: relative;
+}
+
+.input {
+  
+  display: inline-block;
+  position: relative;
+  
+}
+
+.active-result {
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  text-indent: -9999em;
+  background-position: center;
 }
 
 .input,
 textarea,
 .preview,
 select,
-button {
+button,
+.chosen-single {
   font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
   line-height: 1.6;
@@ -96,11 +99,35 @@ textarea {
 
 @media (max-width: 600px) {
   body {
-    padding: 0 10px;  
+    padding: 10px;  
   }
 }
 
+
 @media (min-width: 600px) {
+  
+  body {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  
   section {
     width: 600px;  
   }
@@ -122,3 +149,4 @@ textarea {
     display: flex;
   }
 }
+

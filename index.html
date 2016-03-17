@@ -10,89 +10,103 @@
   <title>Emoji frame</title>
   {% seo %}
   <link rel="stylesheet" href="site.css" charset="utf-8">
+  <link rel="stylesheet" href="chosen.min.css" charset="utf-8">
   <script type="text/javascript" src="emojify.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.js"></script>
+  <script type="text/javascript" src="chosen.jquery.min.js"></script>
+  
 </head>
 <body>
   <section class="section-controls">
     <span id="input" class="input" contenteditable>type here</span> 
-    <select id="one" class="" name=""></select>
-    <select id="two" class="" name=""></select>
-  </section>
-  <section class="section-preview">
-    <textarea id='copy'></textarea>
-    <div id='preview' class="preview">&nbsp;</div>
-  </section>
-  
-  <script>
-  
-  var emojis = emojify.emojiNames;
-
-  emojis.forEach(function(i){
-    $('select').append('<option value=:'+i+':>'+i+'</option>');
-  })
-  
-  gogo();
-  
-  $(document).on('keyup.input',function(e){
-    gogo();
-  });
-  
-  $("select").change(function() {
-    gogo();
-  })
-  
-  function gogo() {
-    var val = $('#input').text();
-    var innerEmoji = $('#one').val();
-    var outerEmoji = $('#two').val();
-    var output = '';
     
-    var innerSize = Math.ceil( parseInt($('#input').width()) / 24) + 2;
-    var outerSize = innerSize + 2;
-    
-    // outer top
-    for(var i = 0; i < outerSize; i++) {
-      output += outerEmoji + ' ';
-    }
-    output += '\n';
-    
-    // inner top
-    output += outerEmoji + ' ';
-    for(var i = 0; i < innerSize; i++) {
-      output += innerEmoji + ' ';
-    }
-    output += ' ' + outerEmoji + ' ';
-    output += '\n';
-    // outer left
-    output += outerEmoji + ' ';
-    // inner left
-    output += innerEmoji + '  ';
-    output += val;
-    // inner right
-    output += '  ' + innerEmoji;
-    // outer right
-    output += ' ' + outerEmoji;
-    output += '\n';
-    // inner bottom
-    output += outerEmoji + ' ';
-    for(var i = 0; i < innerSize; i++) {
-      output += innerEmoji + ' ';
-    }
-    output += ' ' + outerEmoji + ' ';
-    // outer bottom
-    output += '\n';
-    for(var i = 0; i < outerSize; i++) {
-      output += outerEmoji + ' ';
-    }
-    
-    
-    $('#copy').val(output);
-    $('#preview').text(output);
-    
-    emojify.run(document.getElementById('preview'))
-  }
-  
-  </script>
-</body>
-</html>
+    <select id="inner" data-placeholder="Choose an emoji..." class="chosen-select" style="width:100px;" tabindex="2">
+      {% for image in site.static_files %}{% if image.path contains 'images/emoji' %}{
+        {% assign emoji = image.path | replace: '.png','' | replace: '/images/emoji/' %}
+        <option style="background-image:url('images/emoji/{{emoji}}.png')" value=":{{emoji}}:"{% if emoji == 'sparkles' %} selected{% endif %}>{{emoji}}</option>
+        {% endif %}{% endfor %}
+      </select>
+      
+      <select id="outer" data-placeholder="Choose an emoji..." class="chosen-select" style="width:100px;" tabindex="2">
+        {% for image in site.static_files %}{% if image.path contains 'images/emoji' %}{
+          {% assign emoji = image.path | replace: '.png','' | replace: '/images/emoji/' %}
+          <option style="background-image:url('images/emoji/{{emoji}}.png')" value=":{{emoji}}:"{% if emoji == 'sparkles' %} selected{% endif %}>{{emoji}}</option>
+          {% endif %}{% endfor %}
+        </select>
+        
+      </section>
+      <section class="section-preview">
+        <textarea id='copy'></textarea>
+        <div id='preview' class="preview">&nbsp;</div>
+      </section>
+      
+      
+      <script>
+      
+      $(".chosen-select")
+      .chosen({disable_search_threshold: 10})
+      .on('change', function() {
+        gogo()
+      });
+      
+      $(document).on('keyup.input',function(e){
+        gogo()
+      });
+      
+      
+      gogo()
+      
+      function gogo() {
+        var val = $('#input').text();
+        var innerEmoji = ':'+$('#inner_chosen .chosen-single span').text()+':';
+        var outerEmoji = ':'+$('#outer_chosen .chosen-single span').text()+':';
+        var output = '';
+        
+        var innerSize = Math.ceil( parseInt($('#input').width()) / 24) + 2;
+        var outerSize = innerSize + 2;
+        
+        // outer top
+        for(var i = 0; i < outerSize; i++) {
+          output += outerEmoji + ' ';
+        }
+        output += '\n';
+        
+        // inner top
+        output += outerEmoji + ' ';
+        for(var i = 0; i < innerSize; i++) {
+          output += innerEmoji + ' ';
+        }
+        output += ' ' + outerEmoji + ' ';
+        output += '\n';
+        // outer left
+        output += outerEmoji + ' ';
+        // inner left
+        output += innerEmoji + ' &nbsp; ';
+        output += val;
+        // inner right
+        output += ' &nbsp; ' + innerEmoji;
+        // outer right
+        output += ' ' + outerEmoji;
+        output += '\n';
+        // inner bottom
+        output += outerEmoji + ' ';
+        for(var i = 0; i < innerSize; i++) {
+          output += innerEmoji + ' ';
+        }
+        output += ' ' + outerEmoji + ' ';
+        // outer bottom
+        output += '\n';
+        for(var i = 0; i < outerSize; i++) {
+          output += outerEmoji + ' ';
+        }
+        
+        
+        $('#copy').val(output);
+        $('#preview').text(output.replace(/&nbsp;/g,''));
+        
+        emojify.run(document.getElementById('preview'))
+      }
+      
+      </script>
+    </body>
+    </html>
