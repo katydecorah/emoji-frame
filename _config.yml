@@ -1,0 +1,11 @@
+title: Emoji frame
+description: Add some pizzazz to your words with an emoji border
+url: http://katydecorah.com
+baseurl: /emoji-frame
+twitter: katydecorah
+author: katydecorah
+twitter:
+  username: katydecorah
+image: image/site.png
+gems:
+  - jekyll-seo-tag

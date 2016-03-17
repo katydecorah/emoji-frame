@@ -1,0 +1,97 @@
+---
+
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Emoji frame</title>
+  <link rel="stylesheet" href="site.css" charset="utf-8">
+  <script type="text/javascript" src="emojify.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.js"></script>
+  {% seo %}
+</head>
+<body>
+  <section class="section-controls">
+    <span id="input" class="input" contenteditable>type here</span> 
+    <select id="one" class="" name=""></select>
+    <select id="two" class="" name=""></select>
+  </section>
+  <section class="section-preview">
+    <textarea id='copy'></textarea>
+    <div id='preview' class="preview">&nbsp;</div>
+  </section>
+  
+  <script>
+  
+  var emojis = emojify.emojiNames;
+
+  emojis.forEach(function(i){
+    $('select').append('<option value=:'+i+':>'+i+'</option>');
+  })
+  
+  gogo();
+  
+  $(document).on('keyup.input',function(e){
+    gogo();
+  });
+  
+  $("select").change(function() {
+    gogo();
+  })
+  
+  function gogo() {
+    var val = $('#input').text();
+    var innerEmoji = $('#one').val();
+    var outerEmoji = $('#two').val();
+    var output = '';
+    
+    var innerSize = Math.ceil( parseInt($('#input').width()) / 24) + 2;
+    var outerSize = innerSize + 2;
+    
+    // outer top
+    for(var i = 0; i < outerSize; i++) {
+      output += outerEmoji + ' ';
+    }
+    output += '\n';
+    
+    // inner top
+    output += outerEmoji + ' ';
+    for(var i = 0; i < innerSize; i++) {
+      output += innerEmoji + ' ';
+    }
+    output += ' ' + outerEmoji + ' ';
+    output += '\n';
+    // outer left
+    output += outerEmoji + ' ';
+    // inner left
+    output += innerEmoji + '  ';
+    output += val;
+    // inner right
+    output += '  ' + innerEmoji;
+    // outer right
+    output += ' ' + outerEmoji;
+    output += '\n';
+    // inner bottom
+    output += outerEmoji + ' ';
+    for(var i = 0; i < innerSize; i++) {
+      output += innerEmoji + ' ';
+    }
+    output += ' ' + outerEmoji + ' ';
+    // outer bottom
+    output += '\n';
+    for(var i = 0; i < outerSize; i++) {
+      output += outerEmoji + ' ';
+    }
+    
+    
+    $('#copy').val(output);
+    $('#preview').text(output);
+    
+    emojify.run(document.getElementById('preview'))
+  }
+  
+  </script>
+</body>
+</html>
