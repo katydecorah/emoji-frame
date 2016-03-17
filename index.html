@@ -59,7 +59,13 @@
       function gogo() {
         var val = $('#input').text();
         var innerEmoji = ':'+$('#inner_chosen .chosen-single span').text()+':';
+        if (innerEmoji == '') {
+          var innerEmoji = $('#inner').val();
+        }
         var outerEmoji = ':'+$('#outer_chosen .chosen-single span').text()+':';
+        if (outerEmoji == '') {
+          var outerEmoji = $('#outer').val();
+        }
         var output = '';
         
         var innerSize = Math.ceil( parseInt($('#input').width()) / 24) + 2;
