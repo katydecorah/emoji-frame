@@ -59,6 +59,16 @@ section {
   text-indent: -9999em;
 }
 
+.chosen-single {
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    background-position: 2px;
+}
+
+.chosen-container-single .chosen-single.chosen-single span {
+  display: none;
+}
+
 .input,
 textarea,
 .preview,

@@ -19,20 +19,14 @@
 </head>
 <body>
   <section class="section-controls">
-    <span id="input" class="input" contenteditable>type here</span> 
+    <span id="input" class="input" contenteditable>Hello there</span> 
     
-    <select id="inner" data-placeholder="Choose an emoji..." class="chosen-select" style="width:100px;" tabindex="2">
-      {% for image in site.static_files %}{% if image.path contains 'images/emoji' %}{
-        {% assign emoji = image.path | replace: '.png','' | replace: '/images/emoji/' %}
-        <option style="background-image:url('images/emoji/{{emoji}}.png')" value=":{{emoji}}:"{% if emoji == 'sparkles' %} selected{% endif %}>{{emoji}}</option>
-        {% endif %}{% endfor %}
+    <select id="inner" data-placeholder="Choose an emoji..." class="chosen-select" tabindex="2">{% for image in site.static_files %}{% if image.path contains 'images/emoji' %}{% assign emoji = image.path | replace: '.png','' | replace: '/images/emoji/' %}<option style="background-image:url('images/emoji/{{emoji}}.png')" value=":{{emoji}}:"{% if emoji == 'sparkles' %} selected{% endif %}>{{emoji}}</option>
+      {% endif %}{% endfor %}
       </select>
       
-      <select id="outer" data-placeholder="Choose an emoji..." class="chosen-select" style="width:100px;" tabindex="2">
-        {% for image in site.static_files %}{% if image.path contains 'images/emoji' %}{
-          {% assign emoji = image.path | replace: '.png','' | replace: '/images/emoji/' %}
-          <option style="background-image:url('images/emoji/{{emoji}}.png')" value=":{{emoji}}:"{% if emoji == 'sparkles' %} selected{% endif %}>{{emoji}}</option>
-          {% endif %}{% endfor %}
+      <select id="outer" data-placeholder="Choose an emoji..." class="chosen-select" tabindex="2">{% for image in site.static_files %}{% if image.path contains 'images/emoji' %}{% assign emoji = image.path | replace: '.png','' | replace: '/images/emoji/' %}<option style="background-image:url('images/emoji/{{emoji}}.png')" value=":{{emoji}}:"{% if emoji == 'sparkles' %} selected{% endif %}>{{emoji}}</option>
+        {% endif %}{% endfor %}
         </select>
         
       </section>
@@ -45,7 +39,7 @@
       <script>
       
       $(".chosen-select")
-      .chosen({disable_search_threshold: 10})
+      .chosen({width: "70px"})
       .on('change', function() {
         gogo()
       });
@@ -59,11 +53,15 @@
       
       function gogo() {
         var val = $('#input').text();
+        
         var innerEmoji = ':'+$('#inner_chosen .chosen-single span').text()+':';
+        $('#inner_chosen .chosen-single').css('background-image','url(images/emoji/'+$('#inner_chosen .chosen-single span').text()+'.png)');
         if (innerEmoji == '') {
           var innerEmoji = $('#inner').val();
         }
+        
         var outerEmoji = ':'+$('#outer_chosen .chosen-single span').text()+':';
+        $('#outer_chosen .chosen-single').css('background-image','url(images/emoji/'+$('#outer_chosen .chosen-single span').text()+'.png)');
         if (outerEmoji == '') {
           var outerEmoji = $('#outer').val();
         }
