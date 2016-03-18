@@ -52,19 +52,12 @@
   function frameIt() {
     var val = $('#input').text();
     // inner emoji
-    var inner = $('#inner_chosen .chosen-single span').text();
-    var innerEmoji = ':'+inner+':';
-    $('#inner_chosen .chosen-single').css('background-image','url(images/emoji/'+inner+'.png)');
-    if (innerEmoji == '') {
-      var innerEmoji = $('#inner').val();
-    }
+    var innerEmoji = $('#inner').val();
+    $('#inner_chosen .chosen-single').css('background-image','url(images/emoji/'+innerEmoji.replace(/:/g,'')+'.png)');
+    
     // outer emoji
-    var outer = $('#outer_chosen .chosen-single span').text();
-    var outerEmoji = ':'+outer+':';
-    $('#outer_chosen .chosen-single').css('background-image','url(images/emoji/'+outer+'.png)');
-    if (outerEmoji == '') {
-      var outerEmoji = $('#outer').val();
-    }
+    var outerEmoji = $('#outer').val();
+    $('#outer_chosen .chosen-single').css('background-image','url(images/emoji/'+outerEmoji.replace(/:/g,'')+'.png)');
     
     var output = '';
     
