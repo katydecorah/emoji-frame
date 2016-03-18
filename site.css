@@ -4,28 +4,6 @@
   padding: 0;
 }
 
-.emoji {
-  width: 20px;
-  height: 20px;
-}
-
-.clippy {
-  width: 15px;
-}
-
-.btn {
-  border-radius: 0 0 5px 5px;
-  width: 100%;
-  border: 1px solid #D2D7D3;
-  background: transparent;
-  padding: 10px;
-}
-
-.btn:hover {
-  background: #D2D7D3;
-  cursor: pointer;
-}
-
 html,
 body {
   width: 100%;
@@ -41,6 +19,10 @@ section {
   width: 100%;
 }
 
+.emoji {
+  width: 20px;
+  height: 20px;
+}
 
 .section-controls {
   margin-bottom: 20px;
@@ -104,18 +86,41 @@ button,
   border: none;
   padding: 10px;
   position: relative;
-  border-radius: 5px 5px 0 0;
+  border-radius: 5px;
+  white-space: pre;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
 }
+
+.preview:hover {
+  background: rgba(255, 255, 255, .75);
+}
+
+.preview:before {
+  transition: .25s;
+  content: 'click to copy';
+  position: absolute;
+  text-align: center;
+  color: rgba(000, 000, 000, .2);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: .25s;
+  opacity: 0;
+}
+
+.preview:hover:before {
+  transition: .25s;
+  opacity: 1;
+}
+
 
 select {
   width: 75px;
 }
 
 
-.preview {
-  white-space: pre;
-  background: #fff;
-}
 
 
 @media (max-width: 600px) {
@@ -151,16 +156,6 @@ select {
   
   section {
     width: 600px;  
-  }
-  
-  .preview {
-    border-radius: 5px 0 0 5px;
-  }
-  
-  .btn {
-    border-radius: 0 5px 5px 0;
-    padding: 0 10px;
-    width: 50px;
   }
   
   .section-preview {
