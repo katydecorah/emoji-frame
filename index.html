@@ -15,6 +15,8 @@
   <script type="text/javascript" src="emojify.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.js"></script>
   <script type="text/javascript" src="chosen.jquery.min.js"></script>
+  <script src="clipboard.min.js"></script>
+
   
 </head>
 <body>
@@ -30,14 +32,21 @@
         </select>
         
       </section>
+      
       <section class="section-preview">
-        <textarea id='copy'></textarea>
-        <div id='preview' class="preview">&nbsp;</div>
+        
+        <div id='preview' class="preview"></div>
+        <button class="btn" data-clipboard-target="#preview">
+          <img class="clippy" src="clippy.svg" alt="Copy to clipboard">
+        </button>
+
       </section>
       
       
       <script>
       
+      new Clipboard('.btn');
+
       $(".chosen-select").chosen({width: "70px"}).on('change', function() {
         frameIt()
       });
@@ -69,11 +78,11 @@
         var output = '';
         
         var inputSize = parseInt($('#input').width());
-        var innerSize = (Math.ceil(inputSize) / 24) + 2;
+        var innerSize = (Math.ceil(inputSize) / 20) + 1;
         var outerSize = innerSize + 2;
         
-        var trueOuter =  (Math.ceil(outerSize) * 24) + (Math.ceil(outerSize) - 1);
-        var trueInput =  (inputSize + 96) + 7;
+        var trueOuter =  (Math.ceil(outerSize) * 20) + (Math.ceil(outerSize) - 1);
+        var trueInput =  (inputSize + 80) + 7;
 
         // outer top
         for(var i = 0; i < outerSize; i++) {
@@ -90,13 +99,13 @@
         output += '\n';
         // outer left
         output += outerEmoji + ' ';
-        if (trueInput != trueOuter) output += '&nbsp;';
         // inner left
-        output += innerEmoji + '&nbsp; ';
+        output += innerEmoji + ' ';
+        //if (trueInput != trueOuter) output += '&nbsp;';
         output += val;
         // inner right
-        if (trueInput != trueOuter) output += '&nbsp;';
-        output += ' &nbsp;' + innerEmoji;
+        //if (trueInput != trueOuter) output += '&nbsp;';
+        output += ' ' + innerEmoji;
         // outer right
         output += ' ' + outerEmoji;
         output += '\n';
@@ -112,8 +121,7 @@
           output += outerEmoji + ' ';
         }
         
-        
-        $('#copy').val(output);
+        //$('#copy').val(output);
         $('#preview').text(output.replace(/&nbsp;/g,''));
         
         emojify.run(document.getElementById('preview'))
