@@ -38,38 +38,43 @@
       
       <script>
       
-      $(".chosen-select")
-      .chosen({width: "70px"})
-      .on('change', function() {
-        gogo()
+      $(".chosen-select").chosen({width: "70px"}).on('change', function() {
+        frameIt()
       });
       
       $(document).on('keyup.input',function(e){
-        gogo()
+        frameIt()
       });
       
       
-      gogo()
+      frameIt()
       
-      function gogo() {
+      function frameIt() {
         var val = $('#input').text();
-        
-        var innerEmoji = ':'+$('#inner_chosen .chosen-single span').text()+':';
-        $('#inner_chosen .chosen-single').css('background-image','url(images/emoji/'+$('#inner_chosen .chosen-single span').text()+'.png)');
+        // inner emoji
+        var inner = $('#inner_chosen .chosen-single span').text();
+        var innerEmoji = ':'+inner+':';
+        $('#inner_chosen .chosen-single').css('background-image','url(images/emoji/'+inner+'.png)');
         if (innerEmoji == '') {
           var innerEmoji = $('#inner').val();
         }
-        
-        var outerEmoji = ':'+$('#outer_chosen .chosen-single span').text()+':';
-        $('#outer_chosen .chosen-single').css('background-image','url(images/emoji/'+$('#outer_chosen .chosen-single span').text()+'.png)');
+        // outer emoji
+        var outer = $('#outer_chosen .chosen-single span').text();
+        var outerEmoji = ':'+outer+':';
+        $('#outer_chosen .chosen-single').css('background-image','url(images/emoji/'+outer+'.png)');
         if (outerEmoji == '') {
           var outerEmoji = $('#outer').val();
         }
+        
         var output = '';
         
-        var innerSize = Math.ceil( parseInt($('#input').width()) / 24) + 2;
+        var inputSize = parseInt($('#input').width());
+        var innerSize = (Math.ceil(inputSize) / 24) + 2;
         var outerSize = innerSize + 2;
         
+        var trueOuter =  (Math.ceil(outerSize) * 24) + (Math.ceil(outerSize) - 1);
+        var trueInput =  (inputSize + 96) + 7;
+
         // outer top
         for(var i = 0; i < outerSize; i++) {
           output += outerEmoji + ' ';
@@ -85,11 +90,13 @@
         output += '\n';
         // outer left
         output += outerEmoji + ' ';
+        if (trueInput != trueOuter) output += '&nbsp;';
         // inner left
-        output += innerEmoji + ' &nbsp; ';
+        output += innerEmoji + '&nbsp; ';
         output += val;
         // inner right
-        output += ' &nbsp; ' + innerEmoji;
+        if (trueInput != trueOuter) output += '&nbsp;';
+        output += ' &nbsp;' + innerEmoji;
         // outer right
         output += ' ' + outerEmoji;
         output += '\n';
