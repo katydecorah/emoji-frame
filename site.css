@@ -37,6 +37,13 @@ section {
   padding: 5px 10px;
   border-radius: 3px;
   height: 36px;
+  transition: .25s;
+}
+
+.input:hover,
+.chosen-container-single .chosen-single:hover {
+  background-color: rgba(255, 255, 255, .3);
+  transition: .25s;
 }
 
 .chosen-single span {

@@ -59,55 +59,59 @@
     var outerEmoji = $('#outer').val();
     $('#outer_chosen .chosen-single').css('background-image','url(images/emoji/'+outerEmoji.replace(/:/g,'')+'.png)');
     
-    var output = '';
-    
     var inputSize = parseInt($('#input').width());
-    var innerSize = (Math.ceil(inputSize) / 20) + 1;
+    var innerSize = (Math.ceil(inputSize / 20)) + 1;
     var outerSize = innerSize + 2;
+        
+    var top = '';
+    var middle = '';
+    var bottom = '';
     
-    var trueOuter =  (Math.ceil(outerSize) * 20) + (Math.ceil(outerSize) - 1);
-    var trueInput =  (inputSize + 80) + 7;
-    
+    ///////////////// TOP
     // outer top
     for(var i = 0; i < outerSize; i++) {
-      output += outerEmoji + ' ';
+      top += outerEmoji;
+      if ( i < (outerSize - 1)) {
+        top += ' '
+      }
     }
-    output += '\n';
-    
+    top += '\n';
     // inner top
-    output += outerEmoji + ' ';
+    top += outerEmoji + ' ';
     for(var i = 0; i < innerSize; i++) {
-      output += innerEmoji + ' ';
+      top += innerEmoji + ' ';
     }
-    output += ' ' + outerEmoji + ' ';
-    output += '\n';
+    top += outerEmoji;
+    ///////////////// MIDDLE
+    middle += '\n';
     // outer left
-    output += outerEmoji + ' ';
+    middle += outerEmoji + ' ';
     // inner left
-    output += innerEmoji + ' ';
-    //if (trueInput != trueOuter) output += '&nbsp;';
-    output += val;
+    middle += innerEmoji + ' ';
+    middle += val;
     // inner right
-    //if (trueInput != trueOuter) output += '&nbsp;';
-    output += ' ' + innerEmoji;
+    middle += ' ' + innerEmoji;
     // outer right
-    output += ' ' + outerEmoji;
-    output += '\n';
+    middle += ' ' + outerEmoji;
+    middle += '\n';
+    
+    ///////////////// BOTTOM
     // inner bottom
-    output += outerEmoji + ' ';
+    bottom += outerEmoji + ' ';
     for(var i = 0; i < innerSize; i++) {
-      output += innerEmoji + ' ';
+      bottom += innerEmoji + ' ';
     }
-    output += ' ' + outerEmoji + ' ';
+    bottom += outerEmoji;
     // outer bottom
-    output += '\n';
+    bottom += '\n';
     for(var i = 0; i < outerSize; i++) {
-      output += outerEmoji + ' ';
+      bottom += outerEmoji;
+      if ( i < (outerSize - 1)) {
+        bottom += ' '
+      }
     }
     
-    //$('#copy').val(output);
-    $('#preview').text(output.replace(/&nbsp;/g,''));
-    
+    $('#preview').text(top + middle + bottom);
     emojify.run(document.getElementById('preview'))
   }
   
