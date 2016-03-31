@@ -1,0 +1,14 @@
+{
+  "name": "emoji-frame",
+  "version": "0.0.1",
+  "main": "package.json",
+  "author": "Katy DeCorah",
+  "devDependencies": {
+    "js-yaml": "^2.1.3",
+    "tap-spec": "~4.1.1",
+    "tape": "^4.2.2"
+  },
+  "scripts": {
+    "test": "tape test/*.js | tap-spec"
+  }
+}

@@ -9,3 +9,9 @@ twitter:
 image: image/site.png
 gems:
   - jekyll-seo-tag
+
+exclude:
+  - README.md
+  - node_modules
+  - *.lock
+  - package.json
