@@ -20,7 +20,7 @@ A theme is formatted like this:
 
 ```
 - theme: [name of theme]
-  emojis: [inner emoji name] [outer emoji name]
+  emoji: [inner emoji name] [outer emoji name]
 ```
 
 To find the name of an emoji, check out: http://emoji.muan.co/
