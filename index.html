@@ -28,6 +28,14 @@
     <select id="outer" data-placeholder="Choose an emoji..." class="chosen-select" tabindex="2">{% for image in site.static_files %}{% if image.path contains 'images/emoji' %}{% assign emoji = image.path | replace: '.png','' | replace: '/images/emoji/' %}<option style="background-image:url('images/emoji/{{emoji}}.png')" value=":{{emoji}}:"{% if emoji == 'sparkles' %} selected{% endif %}>{{emoji}}</option>
       {% endif %}{% endfor %}
     </select>
+    
+    <select class='select' id="theme">
+      <option selected disabled value="">Themes</option>
+      {% for option in site.data.themes %}
+      <option value="{{option.emoji | split:' ' | first}},{{option.emoji | split:' ' | last}}">{{option.theme}}</option>
+      {% endfor %}
+    </select>
+    
   </section>
   
   <section class="section-preview">
@@ -40,10 +48,20 @@
   new Clipboard('.preview');
   
   $(".chosen-select").chosen({width: "70px"}).on('change', function() {
+    $('#theme').val('').trigger('chosen:updated');
     frameIt()
   });
   
   $(document).on('keyup.input',function(e){
+    frameIt()
+  });
+  
+  $(".select").chosen({width: "100px"}).on('change', function() {
+    var themeVal = $(this).val();
+    var themeInner = ':'+themeVal.split(',')[0]+':';
+    var themeOuter = ':'+themeVal.split(',')[1]+':';     
+    $('#inner').val(themeInner).trigger('chosen:updated');
+    $('#outer').val(themeOuter).trigger('chosen:updated');
     frameIt()
   });
   
@@ -62,7 +80,7 @@
     var inputSize = parseInt($('#input').width());
     var innerSize = (Math.ceil(inputSize / 20)) + 1;
     var outerSize = innerSize + 2;
-        
+    
     var top = '';
     var middle = '';
     var bottom = '';

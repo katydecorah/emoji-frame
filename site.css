@@ -13,6 +13,7 @@ body {
 body {
   background: #ECF0F1;
   color: #22313F;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 section {
@@ -31,7 +32,8 @@ section {
 }
 
 .input,
-.chosen-container-single .chosen-single {
+.chosen-container-single .chosen-single,
+.select {
   max-width: 100%;
   border: 1px solid #D2D7D3;
   padding: 5px 10px;
@@ -58,19 +60,22 @@ section {
   
 }
 
-.active-result {
+#inner_chosen .active-result,
+#outer_chosen .active-result  {
   background-repeat: no-repeat;
   background-size: 20px 20px;
   text-indent: -9999em;
 }
 
-.chosen-single {
+#inner_chosen .chosen-single,
+#outer_chosen .chosen-single {
   background-repeat: no-repeat;
   background-size: 20px 20px;
   background-position: 2px;
 }
 
-.chosen-container-single .chosen-single.chosen-single span {
+#inner_chosen.chosen-container-single .chosen-single.chosen-single span,
+#outer_chosen.chosen-container-single .chosen-single.chosen-single span {
   display: none;
 }
 
@@ -78,6 +83,7 @@ section {
 .preview,
 select,
 button,
+.chosen-container .chosen-results li,
 .chosen-single {
   font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
