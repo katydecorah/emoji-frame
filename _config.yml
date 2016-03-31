@@ -13,5 +13,5 @@ gems:
 exclude:
   - README.md
   - node_modules
-  - *.lock
+  - '*.lock'
   - package.json
