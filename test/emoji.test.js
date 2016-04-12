@@ -56,7 +56,7 @@ data.themes.metadata.forEach(function(post) {
     var emojis = post.emoji.split(' ');
     
     emojis.forEach(function(emoji){
-      t.notEqual(emojiSet.indexOf(emoji),-1,'emoji must exist in set, see images/emoji/');
+      t.notEqual(emojiSet.indexOf(emoji),-1, '"' + emoji + '" emoji must exist in set, see images/emoji/');
     })
     
     t.equal(emojis.length,2,'must have two emojis');
