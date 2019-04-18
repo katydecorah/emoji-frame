@@ -7,7 +7,7 @@ author: katydecorah
 twitter:
   username: katydecorah
 image: image/site.png
-gems:
+plugins:
   - jekyll-seo-tag
 
 exclude:
