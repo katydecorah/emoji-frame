@@ -4,7 +4,7 @@
   "main": "package.json",
   "author": "Katy DeCorah",
   "devDependencies": {
-    "js-yaml": "^2.1.3",
+    "js-yaml": "^3.13.1",
     "tap-spec": "~4.1.1",
     "tape": "^4.2.2"
   },
