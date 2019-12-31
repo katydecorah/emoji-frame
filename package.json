@@ -4,11 +4,24 @@
   "main": "package.json",
   "author": "Katy DeCorah",
   "devDependencies": {
-    "js-yaml": "^2.1.3",
-    "tap-spec": "~4.1.1",
+    "js-yaml": "^3.13.1",
+    "tap-spec": "^5.0.0",
     "tape": "^4.2.2"
   },
   "scripts": {
     "test": "tape test/*.js | tap-spec"
-  }
+  },
+  "description": "Your text deserves to be placed in an emoji frame",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katydecorah/emoji-frame.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/katydecorah/emoji-frame/issues"
+  },
+  "homepage": "https://github.com/katydecorah/emoji-frame#readme"
 }
