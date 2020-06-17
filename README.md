@@ -9,7 +9,7 @@ This site is built with [Jekyll](http://jekyllrb.com/), see [Using Jekyll with P
 Recommended build:
 
 ```
-bundle exec jekyll serve -w
+bundle exec jekyll serve
 ```
 
 To test locally, first run `npm install` and then `npm test`.
